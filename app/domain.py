@@ -46,6 +46,8 @@ class Account:
 
     def debit(self, amount_cents: int) -> int:
         _require_non_negative_cents(amount_cents)
+        if amount_cents > self._balance_cents:
+            raise InsufficientFundsError("Insufficient funds for this debit.")
         self._balance_cents -= amount_cents
         return self._balance_cents
 
@@ -126,6 +128,12 @@ class AccountService:
     def credit(self, amount_cents: int) -> int:
         account = Account(self._store.load_balance_cents())
         new_balance = credit(account, amount_cents)
+        self._store.record_transaction(
+            amount_cents=amount_cents,
+            tx_type="credit",
+            resulting_balance_cents=new_balance,
+            timestamp=_now_iso(),
+        )
         return new_balance
 
     def debit(self, amount_cents: int) -> int:
