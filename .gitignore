@@ -9,3 +9,14 @@ node_modules/
 
 # node-accounting-app
 node-accounting-app/*
+
+# Python
+__pycache__/
+.pytest_cache/
+venv/
+.venv/
+*.egg-info/
+
+# runtime balance (generated on first credit/debit)
+data/balance.json
+data/balance.json.tmp
