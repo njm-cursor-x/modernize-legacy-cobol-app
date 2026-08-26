@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Account Management System</title>
+    <style>
+      body {
+        font-family: Georgia, "Times New Roman", serif;
+        max-width: 32rem;
+        margin: 2rem auto;
+        padding: 0 1.25rem 3rem;
+        color: #222;
+        background: #f4f1ea;
+        line-height: 1.5;
+      }
+      h1 {
+        font-size: 1.5rem;
+        font-weight: normal;
+        letter-spacing: 0.02em;
+        border-bottom: 1px solid #c9c2b4;
+        padding-bottom: 0.5rem;
+      }
+      .balance {
+        font-size: 1.75rem;
+        margin: 1.25rem 0;
+      }
+      .balance span {
+        font-variant-numeric: tabular-nums;
+      }
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 0.6rem;
+        margin: 1.5rem 0;
+      }
+      label {
+        font-size: 0.95rem;
+      }
+      input[type="text"] {
+        font: inherit;
+        padding: 0.4rem 0.5rem;
+        border: 1px solid #8a8376;
+        background: #fff;
+        width: 100%;
+        box-sizing: border-box;
+      }
+      .actions {
+        display: flex;
+        gap: 0.5rem;
+      }
+      button {
+        font: inherit;
+        padding: 0.4rem 0.9rem;
+        border: 1px solid #4a453c;
+        background: #fff;
+        cursor: pointer;
+      }
+      button:hover {
+        background: #ebe6dc;
+      }
+      .error {
+        color: #7a1f1f;
+        background: #f3e4e0;
+        border: 1px solid #c9a29a;
+        padding: 0.6rem 0.75rem;
+        margin: 1rem 0;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 0.9rem;
+        margin-top: 0.5rem;
+      }
+      th,
+      td {
+        text-align: left;
+        padding: 0.35rem 0.4rem;
+        border-bottom: 1px solid #d7d0c4;
+        font-variant-numeric: tabular-nums;
+      }
+      th {
+        font-weight: normal;
+        color: #555;
+      }
+      h2 {
+        font-size: 1.1rem;
+        font-weight: normal;
+        margin-top: 2rem;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Account Management System</h1>
+    <p>View the current balance, then credit or debit the account.</p>
+    <p class="balance">Current balance: <span>{{ balance }}</span></p>
+
+    {% if error %}
+    <p class="error" role="alert">{{ error }}</p>
+    {% endif %}
+
+    <form method="post">
+      <label for="amount">Amount</label>
+      <input
+        id="amount"
+        name="amount"
+        type="text"
+        inputmode="decimal"
+        autocomplete="off"
+        required
+        placeholder="100.00"
+      />
+      <div class="actions">
+        <button type="submit" formaction="/credit">Credit</button>
+        <button type="submit" formaction="/debit">Debit</button>
+      </div>
+    </form>
+
+    {% if transactions %}
+    <h2>Recent transactions</h2>
+    <table>
+      <thead>
+        <tr>
+          <th>Type</th>
+          <th>Amount</th>
+          <th>Balance</th>
+          <th>When</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for tx in transactions %}
+        <tr>
+          <td>{{ tx.type }}</td>
+          <td>{{ tx.amount }}</td>
+          <td>{{ tx.balance }}</td>
+          <td>{{ tx.timestamp }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    {% endif %}
+  </body>
+</html>

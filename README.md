@@ -6,7 +6,11 @@ The Python app keeps the same menu and rules: opening balance **$1,000.00**, cre
 
 ## Run the Python app
 
-Python 3.11+; standard library only for the CLI.
+Python 3.11+. The CLI uses the standard library only. The web UI needs FastAPI:
+
+```bash
+pip install -r requirements.txt
+```
 
 ```bash
 python -m app.cli
@@ -25,12 +29,20 @@ Account Management System
 Enter your choice (1-4):
 ```
 
+Web UI (one HTML page, same credit/debit rules):
+
+```bash
+uvicorn app.web:app --reload --host 0.0.0.0 --port 8000
+```
+
+Then open `http://127.0.0.1:8000/`.
+
 Balances are printed as `$1,150.00` (not COBOL-style leading zeros).
 
 ## Tests
 
 ```bash
-pip install -r requirements-dev.txt
+pip install -r requirements.txt -r requirements-dev.txt
 pytest
 ```
 
@@ -51,9 +63,11 @@ See `legacy/README.md`.
 
 | Path | Role |
 |------|------|
-| `app/domain.py` | view / credit / debit; importable by a future HTTP layer |
+| `app/domain.py` | view / credit / debit; used by CLI and HTTP |
 | `app/store.py` | JSON persistence and transaction ledger |
 | `app/cli.py` | interactive menu |
+| `app/web.py` | FastAPI HTML page and optional JSON API |
+| `app/templates/index.html` | Account Management page |
 | `legacy/` | archived COBOL |
 | `TESTPLAN.md` | original business-logic test plan |
 

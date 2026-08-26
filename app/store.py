@@ -63,6 +63,10 @@ class JsonStore:
     def load_balance_cents(self) -> int:
         return self.load().balance_cents
 
+    def list_transactions(self) -> list[Transaction]:
+        """Return ledger entries, oldest first. Missing file → empty list."""
+        return list(self.load().transactions)
+
     def record_transaction(
         self,
         *,
