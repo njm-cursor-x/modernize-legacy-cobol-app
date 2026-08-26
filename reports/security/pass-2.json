@@ -1,0 +1,18 @@
+{
+  "pass": 2,
+  "generated_at": "2026-08-26T14:27:48Z",
+  "scanners": [
+    {
+      "name": "bandit",
+      "version": "bandit 1.9.4",
+      "command": "/home/ubuntu/.local/bin/bandit -r /workspace/app -x .venv,venv,__pycache__ -f json -q -o /tmp/vuln-reach-ccz3yx5v/bandit.json"
+    },
+    {
+      "name": "pip-audit",
+      "version": "pip-audit 2.10.1",
+      "command": "/home/ubuntu/.local/bin/pip-audit -r /workspace/requirements.txt -f json --progress-spinner off --no-deps --disable-pip -o /tmp/vuln-reach-ccz3yx5v/pip-audit.json"
+    }
+  ],
+  "notes": [],
+  "findings": []
+}

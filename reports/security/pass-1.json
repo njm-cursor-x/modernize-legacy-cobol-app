@@ -1,0 +1,140 @@
+{
+  "pass": 1,
+  "generated_at": "2026-08-26T14:09:34Z",
+  "scanners": [
+    {
+      "name": "bandit",
+      "version": "bandit 1.9.4",
+      "command": "/home/ubuntu/.local/bin/bandit -r /workspace/app -x .venv,venv,__pycache__ -f json -q -o /tmp/vuln-reach-nui88hxw/bandit.json"
+    },
+    {
+      "name": "pip-audit",
+      "version": "pip-audit 2.10.1",
+      "command": "/home/ubuntu/.local/bin/pip-audit -r /workspace/requirements.txt -f json --progress-spinner off --no-deps --disable-pip -o /tmp/vuln-reach-nui88hxw/pip-audit.json"
+    }
+  ],
+  "notes": [],
+  "findings": [
+    {
+      "id": "bandit:B403:app/admin.py:5",
+      "source": "bandit",
+      "package": null,
+      "cve": null,
+      "severity": "low",
+      "reachability": "reachable",
+      "evidence": "Consider possible security implications associated with pickle module.",
+      "location": "app/admin.py:5",
+      "title": "B403: blacklist"
+    },
+    {
+      "id": "bandit:B404:app/admin.py:6",
+      "source": "bandit",
+      "package": null,
+      "cve": null,
+      "severity": "low",
+      "reachability": "reachable",
+      "evidence": "Consider possible security implications associated with the subprocess module.",
+      "location": "app/admin.py:6",
+      "title": "B404: blacklist"
+    },
+    {
+      "id": "bandit:B307:app/admin.py:14",
+      "source": "bandit",
+      "package": null,
+      "cve": null,
+      "severity": "medium",
+      "reachability": "reachable",
+      "evidence": "Use of possibly insecure function - consider using safer ast.literal_eval.",
+      "location": "app/admin.py:14",
+      "title": "B307: blacklist"
+    },
+    {
+      "id": "bandit:B301:app/admin.py:19",
+      "source": "bandit",
+      "package": null,
+      "cve": null,
+      "severity": "medium",
+      "reachability": "reachable",
+      "evidence": "Pickle and modules that wrap it can be unsafe when used to deserialize untrusted data, possible security issue.",
+      "location": "app/admin.py:19",
+      "title": "B301: blacklist"
+    },
+    {
+      "id": "bandit:B602:app/admin.py:24",
+      "source": "bandit",
+      "package": null,
+      "cve": null,
+      "severity": "high",
+      "reachability": "reachable",
+      "evidence": "subprocess call with shell=True identified, security issue.",
+      "location": "app/admin.py:24",
+      "title": "B602: subprocess_popen_with_shell_equals_true"
+    },
+    {
+      "id": "pip-audit:PYSEC-2018-28:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2018-18074",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). The Requests package before 2.20.0 for Python sends an HTTP Authorization header to an http URI upon receiving a same-hostname https-to-http redirect, which makes it easier for remote attackers to discover credentials by sniffing the networ",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2018-28 in requests"
+    },
+    {
+      "id": "pip-audit:PYSEC-2023-74:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2023-32681",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). ### Impact  Since Requests v2.3.0, Requests has been vulnerable to potentially leaking `Proxy-Authorization` headers to destination servers, specifically during redirects to an HTTPS origin. This is a product of how `rebuild_proxies` is use",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2023-74 in requests"
+    },
+    {
+      "id": "pip-audit:PYSEC-2023-74:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2023-32681",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). Requests is a HTTP library. Since Requests 2.3.0, Requests has been leaking Proxy-Authorization headers to destination servers when redirected to an HTTPS endpoint. This is a product of how we use `rebuild_proxies` to reattach the `Proxy-Au",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2023-74 in requests"
+    },
+    {
+      "id": "pip-audit:PYSEC-2026-1873:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2024-35195",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). When using a `requests.Session`, if the first request to a given origin is made with `verify=False`, TLS certificate verification may remain disabled for all subsequent requests to that origin, even if `verify=True` is explicitly specified ",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2026-1873 in requests"
+    },
+    {
+      "id": "pip-audit:PYSEC-2026-1872:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2024-47081",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). ### Impact  Due to a URL parsing issue, Requests releases prior to 2.32.4 may leak .netrc credentials to third parties for specific maliciously-crafted URLs.  ### Workarounds For older versions of Requests, use of the .netrc file can be dis",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2026-1872 in requests"
+    },
+    {
+      "id": "pip-audit:PYSEC-2026-2275:requests",
+      "source": "pip-audit",
+      "package": "requests",
+      "cve": "CVE-2026-25645",
+      "severity": "unknown",
+      "reachability": "reachable",
+      "evidence": "import requests (app/admin.py:9). Requests is a HTTP library. Prior to version 2.33.0, the `requests.utils.extract_zipped_paths()` utility function uses a predictable filename when extracting files from zip archives into the system temporary directory. If the target file al",
+      "location": "app/admin.py:9",
+      "title": "PYSEC-2026-2275 in requests"
+    }
+  ]
+}
