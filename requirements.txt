@@ -1,4 +1,6 @@
-fastapi>=0.115.6,<1
-uvicorn>=0.32.0,<1
-jinja2>=3.1.6,<4
-python-multipart>=0.0.20
+# Demo runtime pins (exact versions currently installed).
+fastapi==0.141.1
+uvicorn==0.52.4
+jinja2==3.1.6
+python-multipart==0.0.32
+pydantic==2.13.4
